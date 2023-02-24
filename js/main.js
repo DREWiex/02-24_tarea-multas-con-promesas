@@ -33,10 +33,11 @@ const arrayMultas = [
 
 
 //** Capturas **//
+
 const capForm = document.querySelector('#form');
 const capInputText = document.querySelector('#texto');
-const matricula = arrayAltas.matricula; //* capturo en una variable la propiedad 'matricula' del arrayAltas
-//const nombre = arrayDatosPropietarios.nombre; 
+const matricula = arrayAltas.matricula; //* capturo en una constante la propiedad 'matricula' del arrayAltas
+const nombre = arrayDatosPropietarios.nombre; //* capturo en una constante la propiedad 'nombre' del arrayDatosPropietarios
 
 
 
@@ -60,7 +61,7 @@ const validarMatricula = () => { //* valido a través de una regExp la matrícul
 
 
     if(regExp.test(capInputText.value)){
-        comprobarTodo(matricula, nombre);
+        comprobarTodo(matricula);
     }else{
         console.log('Matrícula incorrecta');
     }
@@ -72,7 +73,9 @@ const validarMatricula = () => { //* valido a través de una regExp la matrícul
 const comprobarAlta = async (matricula) => { //* compruebo si, con la matrícula introducida, el propietario está dado de alta o no (objAltas)
 
     const estado = arrayAltas.find((item) => item.matricula == matricula)?.estado
+
         if(estado) return(estado);
+    
         else throw(`El propietario no está dado de alta`);
 
 } //!FUNC-COMPROBARALTA
@@ -81,8 +84,10 @@ const comprobarAlta = async (matricula) => { //* compruebo si, con la matrícula
 
 const comprobarDatosPropietario = async (matricula) => { //* una vez comprobada el alta, verifico si constan los datos del propietario o no (objDatosPropietarios)
 
-    const datos = arrayDatosPropietarios.find((item) => item.matricula == matricula)?.nombre
-        if(datos) return(nombre);
+    const datos = arrayDatosPropietarios.find((item) => item.matricula == matricula)
+
+        if(datos) return(datos);
+      
         else throw(`No constan datos de ${nombre} en la base de datos`);
 
 } //!FUNC-COMPROBARDATOSPROPIETARIO
@@ -99,9 +104,8 @@ const comprobarMulta = () => { //* si constan los datos del propietario, verific
 
 const comprobarTodo = async (matricula) => {
 
-    let nombre = arrayDatosPropietarios.nombre; //* capturo en una variable la propiedad 'nombre' del arrayDatosPropietarios
-
     try{
+
         const estado = await comprobarAlta(matricula);
 
         const datos = await comprobarDatosPropietario(matricula);
