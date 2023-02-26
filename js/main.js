@@ -1,6 +1,9 @@
 //TODO: Práctica Promesas
 
 //* Comprobar a través de la matrícula indicada:
+//* 1) Si está dado de alta o baja.
+//*     1.1) Si está dado de baja, mostrar error.
+//* 2) Si está dado de alta, 
 
 document.addEventListener('DOMContentLoaded', () => {
 
